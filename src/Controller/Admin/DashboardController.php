@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Cow;
 use App\Entity\User;
+use App\Entity\Milking;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -25,7 +26,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('Cow', 'fas fa-th-list', Cow::class);
         yield MenuItem::linkToCrud('User', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Cow', 'fas fa-th-list', Cow::class);
+        yield MenuItem::linkToCrud('Milking', 'fas fa-thermometer-three-quarters', Milking::class)->setDefaultSort(['createdAt' => 'DESC']);
     }
 }

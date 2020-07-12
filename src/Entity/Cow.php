@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CowRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,16 @@ class Cow
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Milking::class, mappedBy="cow")
+     */
+    private $milkings;
+
+    public function __construct()
+    {
+        $this->milkings = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -73,6 +85,42 @@ class Cow
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Milking[]
+     */
+    public function getMilkings(): Collection
+    {
+        return $this->milkings;
+    }
+
+    public function addMilking(Milking $milking): self
+    {
+        if (!$this->milkings->contains($milking)) {
+            $this->milkings[] = $milking;
+            $milking->setCow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMilking(Milking $milking): self
+    {
+        if ($this->milkings->contains($milking)) {
+            $this->milkings->removeElement($milking);
+            // set the owning side to null (unless already changed)
+            if ($milking->getCow() === $this) {
+                $milking->setCow(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
 }
