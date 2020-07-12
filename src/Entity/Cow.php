@@ -20,20 +20,25 @@ class Cow
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=60)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="datetime")
      */
-    private $matricule;
+    private $bornAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cows")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $matricule;
 
     /**
      * @ORM\OneToMany(targetEntity=Milking::class, mappedBy="cow")
@@ -44,7 +49,6 @@ class Cow
     {
         $this->milkings = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -63,14 +67,14 @@ class Cow
         return $this;
     }
 
-    public function getMatricule(): ?string
+    public function getBornAt(): ?\DateTimeInterface
     {
-        return $this->matricule;
+        return $this->bornAt;
     }
 
-    public function setMatricule(string $matricule): self
+    public function setBornAt(\DateTimeInterface $bornAt): self
     {
-        $this->matricule = $matricule;
+        $this->bornAt = $bornAt;
 
         return $this;
     }
@@ -83,6 +87,18 @@ class Cow
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(string $matricule): self
+    {
+        $this->matricule = $matricule;
 
         return $this;
     }
@@ -122,5 +138,4 @@ class Cow
     {
         return $this->name;
     }
-
 }
