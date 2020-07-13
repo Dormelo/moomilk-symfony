@@ -1,4 +1,6 @@
 {
+    "name": "moomilk-symfony",
+    "description": "This is an agricultural project moomilk",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -32,6 +34,7 @@
         "symfony/yaml": "5.1.*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",

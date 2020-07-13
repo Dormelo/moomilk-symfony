@@ -6,7 +6,6 @@ use App\Entity\Cow;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 
 class CowCrudController extends AbstractCrudController
 {
@@ -22,7 +21,7 @@ class CowCrudController extends AbstractCrudController
 
         return [
             TextField::new('name'),
-            NumberField::new('matricule'),
+            TextField::new('matricule'),
             $user
         ];
     }
