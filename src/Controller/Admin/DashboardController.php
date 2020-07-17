@@ -34,4 +34,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Cow', 'fas fa-th-list', Cow::class);
         yield MenuItem::linkToCrud('Milking', 'fas fa-thermometer-three-quarters', Milking::class)->setDefaultSort(['createdAt' => 'DESC']);
     }
+
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
+            ->setTitle('MooProject')
+            ;
+    }
 }
