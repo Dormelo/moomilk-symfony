@@ -15,10 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractDashboardController
 {
     /**
-     * @Route("/admin")
+     * @Route("/", name="app_admin_dashboard_index")
      */
     public function index(): Response
     {
+        if (! $this->getUser()) {
+             return $this->redirectToRoute('app_login');
+         }
+
         $cowListUrl = $this->get(CrudUrlGenerator::class)->build()->setController(CowCrudController::class)->generateUrl();
 
         return $this->redirect($cowListUrl);
