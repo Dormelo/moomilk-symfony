@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Milking;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -21,9 +22,17 @@ class MilkingCrudController extends AbstractCrudController
         $createdAt = DateTimeField::new('createdAt');
 
         return [
-            $createdAt->setFormat( DateTimeField::FORMAT_MEDIUM,  DateTimeField::FORMAT_SHORT),
+            $createdAt->setCustomOption(DateTimeField::OPTION_DATETIME_PATTERN, 'yyyy-MM-dd HH:mm'),
             $cow,
             NumberField::new('quantity'),
         ];
     }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setSearchFields(['cow.matricule','cow.name'])
+        ;
+    }
+
 }
