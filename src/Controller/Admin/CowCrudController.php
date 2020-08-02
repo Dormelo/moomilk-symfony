@@ -22,7 +22,7 @@ class CowCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             TextField::new('matricule'),
-            $user
+            $user->hideOnIndex()
         ];
     }
     

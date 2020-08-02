@@ -5,7 +5,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="./css/signin.css">
 {% endblock %}
-{% block title %}Log in!{% endblock %}
+{% block title %}Sign in!{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -16,15 +16,15 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    You are signed in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Sign out</a>
                 </div>
             {% endif %}
 
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="inputEmail">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-            <label for="inputPassword">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only" >Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
@@ -44,6 +44,7 @@
             <button class="btn btn-lg btn-primary" type="submit">
                 Sign in
             </button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
         </form>
     </div>
 {% endblock %}
